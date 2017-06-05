@@ -1,0 +1,36 @@
+Case 3: PRODSUP-003:
+
+Dear customer support,
+
+I need to explain how CircleCI works to my boss. I’ve read the docs but I still don’t get it. Can you please
+explain to me, in your own words, how CircleCI works? Also, it seems like you don’t support .NET builds.
+Why is that?
+--
+Adam
+
+=================================================================================================================
+
+Hello Adam,
+
+CircleCI is the tool used for continuous integration with automated test support. It's created to make development test and delivery process easily.
+
+When you make the changes on github,CircleCI automatically runs all your configured tests for the project. Also there is possibility of automatic deployment if tests succeed. 
+So it does all your routine work. 
+
+CircleCI is a universal environment and for most standard projects it works just out of the box. If your project requires any special setup there is an easy way to tune even the most complicated cases.
+
+We do not officially support .NET. Some users have had luck with the mono framework which you can install via circle.yml.
+
+Another interesting idea would be try running .NET inside the docker370.
+.NET is a Windows technology, and CircleCi is running on Linux machines.The only way to build .NET is to try using mono or docker, as mentioned above.
+
+Since building Windows projects on Linux machines tends to be somewhat tricky, it's not something CircleCi has chosen to support at this time.
+
+We always improve our service and work on new features all the time. Please check for updates on our site, we will support .NET also soon.
+
+All information is always available on the site https://circleci.com/docs
+
+Please let me know if you have any questions futher.
+
+Regards,
+Bhaskar

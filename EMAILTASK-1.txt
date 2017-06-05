@@ -1,0 +1,59 @@
+Case 1: PRODSUP-001:
+
+Hi. I am trying to get my test cases to show up on CircleCI but it is not working. I have a fork of this project
+in my github account https://github.com/mtedone/podam. I added the project to CircleCI and got a green
+build but the Test Results tab is empty
+---
+Harry
+
+=====================================================================
+
+Hi Harry,
+
+I went through the issue and below is what I could conclude. 
+
+1. You have to add the circle.yml file with the below code.
+
+
+test:
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+
+
+
+2. You need to enable "Maven Surefire Plugin" in pom.xml file by removing below code:
+
+<configuration>
+   <skip>true</skip>
+</configuration>
+
+Also, you have to remove the below code to git rid of the dependency errors.
+
+
+<plugin>
+	<groupId>com.github.github</groupId>
+	<artifactId>site-maven-plugin</artifactId>
+	<version>0.12</version>
+		<configuration>
+			<message>Creating site for ${project.version}</message>
+		</configuration>
+		<executions>
+			<execution>
+				<goals>
+					<goal>site</goal>
+				</goals>
+				<phase>site</phase>
+			</execution>
+		</executions>
+</plugin>
+
+
+If you need additional information on this, you can check the below link.
+
+https://circleci.com/docs/test-metadata#metadata-collection-in-custom-test-steps
+
+You can also check the changes that I've made at https://github.com/Bhaskarsharma8/podam
+
+Regards,
+Bhaskar
